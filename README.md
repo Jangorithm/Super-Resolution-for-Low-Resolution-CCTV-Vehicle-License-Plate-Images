@@ -60,7 +60,7 @@ SRCNN의 단점은 3개의 컨볼루션 레이어만 사용하여 네트워크�
 ## Results
 
 ![4](https://github.com/user-attachments/assets/da5f344d-dd8b-491c-a815-19f1ae452fa4)
-![out1](https://github.com/user-attachments/assets/20e68b58-9e8d-4033-a0d4-2f733360e9a2)
+
 ![out2](https://github.com/user-attachments/assets/b8f7497e-6f93-44fa-934f-608b183e1361)
 ![out3](https://github.com/user-attachments/assets/5d27c5b6-fde3-4b88-bc9d-337dacbe7448)
 ![out4](https://github.com/user-attachments/assets/40d8ec12-c5be-4f14-89e3-7acf330ea576)
