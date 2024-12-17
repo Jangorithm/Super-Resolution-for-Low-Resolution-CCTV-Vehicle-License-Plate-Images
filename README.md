@@ -1,5 +1,6 @@
-# SRCNN과 VDSR 기반 저화질 CCTV 차량 번호판 이미지 초해상화 연구
+## SRCNN과 VDSR 기반 저화질 CCTV 차량 번호판 이미지 초해상화 연구
 ### Super-Resolution of Low-Quality CCTV Vehicle License Plate Image Using SRCNN and VDSR
+
 
 ## Abstract
 License plate recognition from CCTV footage can vary in accuracy depending on the image quality. To address this issue, we introduce a method that utilizes Super-Resolution techniques to reconstruct low-quality license plate images into high-quality ones.
