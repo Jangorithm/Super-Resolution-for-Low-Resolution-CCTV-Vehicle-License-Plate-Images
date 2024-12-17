@@ -12,9 +12,9 @@ License plate recognition from CCTV footage can vary in accuracy depending on th
 - VDSR
 - Deep Learning
 
-## introduction
+## Introduction
 
-
+## Related Work
 
 ## Experiments
 
