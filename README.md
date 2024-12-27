@@ -1,5 +1,5 @@
 ## 저화질 CCTV 차량 번호판 이미지 Super-Resolution 연구
-### Super-Resolution of Low-Quality CCTV Vehicle License Plate Image Using SRCNN and VDSR
+### Research on Super-Resolution for Low-Resolution CCTV Vehicle License Plate Images
 
 
 ## Abstract
