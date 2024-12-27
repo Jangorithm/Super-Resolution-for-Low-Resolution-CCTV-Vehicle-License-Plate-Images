@@ -51,6 +51,9 @@ SRCNN의 단점은 3개의 컨볼루션 레이어만 사용하여 네트워크�
 
 마지막 컨볼루션 레이어에서는 64개의 채널을 3채널 RGB로 변환하기 위해 3x3 커널 필터를 사용하며, 패딩 1을 적용하여 크기를 유지한다. 최종적으로 입력 이미지를 네트워크 출력에 더해, 고해상도(HR) 이미지를 재구성한다.
 
+![스크린샷 2024-12-27 140814](https://github.com/user-attachments/assets/d1f818a9-2e64-4a3d-8372-60d02fe68e74)
+RCAN
+
 
 학습 시에 이미지 크기는 256x256으로 Resize, Batch Size 16, Optimizer는 Adam, Learning rate 0.0001로 설정하여 epoch 25번 반복 학습하도록 하였다.
 
@@ -60,21 +63,10 @@ SRCNN의 단점은 3개의 컨볼루션 레이어만 사용하여 네트워크�
 
 ## Results
 
-![4](https://github.com/user-attachments/assets/da5f344d-dd8b-491c-a815-19f1ae452fa4)
+![결과이미지](https://github.com/user-attachments/assets/564ce706-64bc-4a05-9140-d36c5ffff195)
+![loss 이미지](https://github.com/user-attachments/assets/de841487-91d8-45cc-8b2a-eecda9bd6acd)
+![평가지표](https://github.com/user-attachments/assets/ee6fb69a-f545-43f4-86c2-1f9c774281f3)
 
-![out2](https://github.com/user-attachments/assets/b8f7497e-6f93-44fa-934f-608b183e1361)
-![out3](https://github.com/user-attachments/assets/5d27c5b6-fde3-4b88-bc9d-337dacbe7448)
-![out4](https://github.com/user-attachments/assets/40d8ec12-c5be-4f14-89e3-7acf330ea576)
-![output1](https://github.com/user-attachments/assets/7a05860a-8559-4294-84ab-7c6210294c25)
-![결과1](https://github.com/user-attachments/assets/bb9a6a62-9f63-4bcd-8c1b-20ad01db1d31)
-![결과2](https://github.com/user-attachments/assets/4425e8b1-0bfd-4573-b66c-e5832aed406d)
-![결과3](https://github.com/user-attachments/assets/929aa060-f15e-4e3e-b7fe-5bfeb0891be7)
-![결과4](https://github.com/user-attachments/assets/d08c6d79-3c18-4282-9f38-337e4a20e101)
-![결과5](https://github.com/user-attachments/assets/b2de7f63-6ece-4e01-bdc6-989974c77f66)
-![결과6](https://github.com/user-attachments/assets/934fbcab-740d-464f-842d-012dc2362be5)
-
-![평가지표](https://github.com/user-attachments/assets/f3f9d6a0-cfb0-4bf3-bb29-0f0bd8302091)
-![결과차트](https://github.com/user-attachments/assets/8e8cf1a1-8e40-4f8f-ba48-d0defffaa49a)
 ## Discussion
 
 ## Conclusion
