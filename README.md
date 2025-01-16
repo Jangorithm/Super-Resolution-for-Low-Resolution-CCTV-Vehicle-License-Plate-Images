@@ -1,5 +1,5 @@
-## 저화질 CCTV 차량 번호판 이미지 Super-Resolution 연구
-### Research on Super-Resolution for Low-Resolution CCTV Vehicle License Plate Images
+## 저화질 CCTV 차량 번호판 이미지 Super-Resolution 
+### Super-Resolution for Low-Resolution CCTV Vehicle License Plate Images
 
 
 ## Abstract
@@ -11,55 +11,32 @@ License plate recognition from CCTV footage can vary in accuracy depending on th
 - VDSR
 - RCAN
 
-## Introduction
-
-## Related Work
 
 ## Experiments
+#### SRCNN(Super-Resolution Convolutional Neural Network)
+Super-Resolution Convolutional Neural Network(SRCNN)은 단일 이미지 초해상화 문제를 해결하기 위해 처음으로 딥러닝 기반 접근 방식을 도입한 모델이다. 기존의 예제 기반 초해상화 기법은 사전 처리 및 사후 처리가 요구되는 복잡한 파이프라인을 사용했으나, SRCNN은 저해상도(LR) 이미지를 고해상도(HR) 이미지로 직접 변환하는 단순한 엔드투엔드 학습 프레임워크를 제안하였다.
 
-데이터 수집 및 전처리 
-본 연구에서는 AI 인프라를 지원하는 통합 플랫폼인 AI-Hub에서 자동차 차종, 연식, 번호판 인식을 위한 영상을 다운로드하여 데이터셋으로 활용하였다. 자동차 번호판 이미지 데이터셋의 시각화는 <그림>에 나타나 있다. 전체 데이터는 70,000개의 Train 데이터, 7,000개의 Validation 데이터, 3,000개의 Test 데이터로 나누어 구성하였다. 
+SRCNN은 3개의 컨볼루션 레이어로 구성된 비교적 간단한 네트워크 구조를 채택하여, 기존 방법론 대비 학습 효율성과 계산 속도를 크게 향상시켰다. 또한, 비선형 매핑 및 재구성(Reconstruction) 단계를 포함한 네트워크의 구성은 고주파 정보를 효과적으로 학습할 수 있도록 설계되었다.
 
-![1](https://github.com/user-attachments/assets/46e06b59-ba25-4c16-ae3c-27bd9224c469)
+그러나 SRCNN은 얕은 네트워크 구조로 인해 복잡한 고주파 세부 정보를 학습하는 데 한계를 보였다. 이러한 한계를 극복하기 위해 VDSR과 같은 보다 심층적인 네트워크 구조가 제안되었다.
 
-현실에서는 저화질 이미지 데이터를 활용하여 Super-Resolution을 수행해야 하지만, 저해상도(LR) 이미지 만으로는 해당 문제를 효과적으로 해결하기 어렵다. 따라서, 해당 문제를 지도학습 방식으로 접근하기 위해 원본 자동차 번호판 이미지를 저해상도(LR) 이미지로 변환하는 Degradation 과정을 거쳐 사전 전처리를 수행해야 한다.
+![SRCNN](https://github.com/user-attachments/assets/67a95a14-12a5-4f93-9053-c5d1971be41a)
 
-![수식](https://github.com/user-attachments/assets/275ca8a6-97f5-42d2-96d3-9d6df45bf44a)
+#### VDSR(Very Deep Super-Resolution)
+Very Deep Super-Resolution Network(VDSR)는 SRCNN의 한계를 극복하기 위해 제안된 모델로, 깊은 네트워크 구조를 통해 고해상도 이미지를 더욱 정밀하게 복원하도록 설계되었다. VDSR은 20개의 컨볼루션 레이어를 활용하여 SRCNN보다 훨씬 넓은 수용 영역(Receptive Field)을 확보하였으며, 더 많은 컨텍스트 정보와 복잡한 이미지 특징을 효과적으로 학습할 수 있다.
 
-Degradation 문제는 <수식 1>과 같이 정의된다.  본 연구에서는 현재 연구 동향을 참고하여 표준화된 Degradation 방식인 Bicubic 다운샘플링을 적용하였다. 비록 해당 방식이 현실에서 발생하는 저해상도(LR) 이미지를 완벽히 대변할 수는 없지만, 자연스러운 블러링 효과와 디테일 손실을 포함하는 특성을 가지고 있어 해당 연구의 Degradation에 적합하다고 판단하였다.
+또한, VDSR은 잔차 학습(Residual Learning) 기법을 활용하여 학습 효율성을 크게 개선하였다. 잔차 학습은 입력 이미지와 고해상도 이미지 간의 차이를 모델링함으로써 네트워크가 복잡한 세부 정보를 더 빠르고 정확하게 학습할 수 있도록 돕는다. 이는 그래디언트 소실 문제를 완화하고, 네트워크 깊이가 증가하더라도 안정적이고 효율적인 학습 과정을 가능하게 한다.
 
+![VDSR](https://github.com/user-attachments/assets/ca48709c-8a11-45c7-930c-bc19fc319702)
 
-<그림>에는 Bicubic 다운샘플링 이미지 전처리를 통해 저해상도(LR) 이미지를 확인할 수 있다.
+#### RCAN(Residual Channel Attention Network)
+Residual Channel Attention Network(RCAN)는 이미지 초해상도 문제를 해결하기 위해 설계된 심층 신경망으로, 고주파 정보를 담고 있는 중요한 채널에 가중치를 부여하여 학습 성능을 극대화하는 모델이다. RCAN은 네트워크의 깊이를 크게 확장하면서도 학습 안정성을 유지하기 위해 Residual in Residual(RIR) 구조와 Channel Attention(CA) 메커니즘을 결합한 것이 특징이다.
 
-![2](https://github.com/user-attachments/assets/dc8da6a1-c180-479a-b2e7-6f957b637905)
+RCAN은 입력 이미지를 얕은 특징 맵으로 변환한 후 RIR 구조를 사용하여 깊은 특징을 추출한다. RIR은 여러 개의 Residual Group(RG)과 롱 스킵 연결(Long Skip Connection)로 구성된다. 각 RG는 다수의 Residual Channel Attention Block(RCAB)으로 이루어져 있으며, RCAB는 Conv 레이어와 숏 스킵 연결(Short Skip Connection)을 통해 잔차를 학습한다. 이러한 구조는 고주파 정보를 강조하며 네트워크가 중요한 정보에 집중하도록 설계되었다.
 
-모델 활용 및 설계
-딥러닝 기반 Super-Resolution(SR) 분야의 시초 모델인 SRCNN과 잔차학습을 활용해 깊은 네트워크 구조로 세밀한 특징을 학습하고 픽셀 복원을 하는 VDSR 모델을 활용해 저화질 자동차 번호판 이미지를 개선하고자 한다.
+RCAB 내부의 채널 주의 메커니즘은 글로벌 평균 풀링(Global Average Pooling)을 통해 각 채널의 전역 정보를 요약한 후, 두 개의 Conv 레이어와 Sigmoid 활성화 함수를 사용하여 채널별 중요도를 계산한다. 이 과정을 통해 중요한 정보를 더욱 강조하며, 최종적으로 고해상도로 변환된 이미지를 출력한다.
 
-![3](https://github.com/user-attachments/assets/7d0dfb1c-de32-4eb5-8a92-3c98b3bcb396)
-
-<그림>을 보면 해당 모델 구조를 확인할 수 있다. SRCNN 모델은 3채널의 저해상도(LR) 이미지를 입력으로 받아, 세 개의 컨볼루션 레이어를 거쳐 고해상도(HR) 이미지로 변환한다. 첫 번째 컨볼루션 레이어에서는 9x9 필터를 사용하여 입력 이미지를 연산한 후, 패딩 4를 적용하여 이미지 크기를 유지하며, 64개의 특징맵으로 변환한다. 이 과정에서 활성화 함수로 ReLU를 사용하여, 저차원 공간에서 유의미한 특징을 추출하고 두 번째 컨볼루션 레이어로 전달한다.
-두 번째 컨볼루션 레이어는 5x5 필터를 사용하여 64개의 특징맵을 32개로 축소하며, 패딩 2를 적용하여 크기를 유지한다. 이 레이어는 비선형 활성화 함수 ReLU를 통해 저해상도 특징을 고해상도 특징으로 매핑하는 역할을 한다.
-마지막 세 번째 컨볼루션 레이어에서는 5x5 필터를 사용하여 32개의 특징맵을 3채널(RGB)의 고해상도 이미지로 변환하며, 패딩 2를 적용해 이미지 크기를 유지한다. 이렇게 학습된 결과를 기반으로 고해상도 이미지를 재구성하여 최종 출력으로 제공한다.
-
-![4](https://github.com/user-attachments/assets/d1381120-14bb-43a8-89bd-3d609fa54787)
-
-SRCNN의 단점은 3개의 컨볼루션 레이어만 사용하여 네트워크가 매우 얕고, 세부적인 특징과 패턴을 학습하는 데 한계가 있다는 점이다. VDSR은 이러한 단점을 극복하기 위해 네트워크를 20개의 레이어로 확장하여 입력 이미지에서 더 복잡한 특징을 학습할 수 있도록 설계되었으며, 잔차 학습(residual learning)을 도입함으로써 저화질 이미지를 고화질 이미지로 재구성하는 효율성을 향상시켰다.
-
-첫 번째 컨볼루션 레이어는 저화질(LR) 이미지의 RGB 3채널을 입력으로 받아, 3x3 크기의 커널 필터를 사용하여 64개의 특징맵을 생성한다. 이 과정에서 패딩 1을 적용해 이미지 크기를 유지하며, 활성화 함수로 ReLU를 사용한다.
-이후 18개의 잔차 블록(Residual Block)으로 구성된 컨볼루션 레이어를 통해 복잡한 특징을 학습한다. 각 블록은 3x3 커널 필터와 패딩 1을 적용하며, 활성화 함수로 ReLU를 사용하여 고주파 정보(에지, 텍스처 등)를 효과적으로 복원할 수 있도록 네트워크를 설계하였다.
-
-마지막 컨볼루션 레이어에서는 64개의 채널을 3채널 RGB로 변환하기 위해 3x3 커널 필터를 사용하며, 패딩 1을 적용하여 크기를 유지한다. 최종적으로 입력 이미지를 네트워크 출력에 더해, 고해상도(HR) 이미지를 재구성한다.
-
-![스크린샷 2024-12-27 140814](https://github.com/user-attachments/assets/d1f818a9-2e64-4a3d-8372-60d02fe68e74)
-RCAN
-
-
-학습 시에 이미지 크기는 256x256으로 Resize, Batch Size 16, Optimizer는 Adam, Learning rate 0.0001로 설정하여 epoch 25번 반복 학습하도록 하였다.
-
-![5](https://github.com/user-attachments/assets/88f06bcc-094c-4be5-9df6-c9ea6ea6d7b5)
-
-
+![RCAN](https://github.com/user-attachments/assets/048b0e08-a425-4bbc-82fc-501893050702)
 
 ## Results
 
@@ -67,8 +44,11 @@ RCAN
 ![loss 이미지](https://github.com/user-attachments/assets/de841487-91d8-45cc-8b2a-eecda9bd6acd)
 ![평가지표](https://github.com/user-attachments/assets/ee6fb69a-f545-43f4-86c2-1f9c774281f3)
 
-## Discussion
-
-## Conclusion
 
 ## References
+- [1] Lim YJ. Nationwide public CCTV 45% 'outdated'... Faces unrecognizable even when criminals are captured. YTN. October 9, 2023. Available from: https://www.ytn.co.kr/_ln/0103_202310090814140873
+- [2] Wang Z, Chen J, Hoi SCH. Deep learning for image super-resolution: A survey. IEEE Trans Pattern Anal Mach Intell. 2021;43(10):3365-3387. doi:10.1109/TPAMI.2020.2982166.
+- [3] Dong C, Loy CC, He K, Tang X. Image super-resolution using deep convolutional networks. IEEE Trans Pattern Anal Mach Intell. 2016;38(2):295-307.
+- [4] Kim J, Lee JK, Lee KM. Accurate image super-resolution using very deep convolutional networks. IEEE Conf Comput Vis Pattern Recognit. 2016;1646-1654. doi:10.48550/arXiv.1511.04587.
+- [5] Zhang Y, Li K, Li K, Wang L, Zhong B, Fu Y. Image super-resolution using very deep residual channel attention networks. Eur Conf Comput Vis. 2018;286-301. doi:10.48550/arXiv.1807.02758.
+- [6] Horé A, Ziou D. Image quality metrics: PSNR vs. SSIM. Proc 20th Int Conf Pattern Recognit. 2010:23-26 Aug; Istanbul, Turkey. IEEE; 2010. doi:10.1109/ICPR.2010.579.
